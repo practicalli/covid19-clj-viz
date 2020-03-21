@@ -14,3 +14,20 @@
    [clojure.string :as string]
    [jsonista.core :as json]
    [oz.core :as oz]))
+
+
+;; Start an Oz server on a specific port
+;; using 8044 for UK (matching telephone country code)
+;; Evaluating the server will open a web page waiting for a Spec (oz/view!)
+
+(oz/start-server! 8044)
+
+
+;; Minimum viable geographic visualization
+;; Googling to find a workable GEO.json file for the UK
+;; https://raw.githubusercontent.com/martinjc/UK-GeoJSON/master/json/administrative/eng/lad.json
+
+(oz/view! {:data {:url    "/public/data/uk-england-lad.geo.json"
+                  :format {:type     "json"
+                           :property "features"}}
+           :mark "geoshape"})
